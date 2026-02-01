@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35818.85 d17.13
+VisualStudioVersion = 17.13.35818.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leetcode.SequenseOfOnes", "Leetcode.SequenseOfOnes\Leetcode.SequenseOfOnes.csproj", "{5E3246BB-FE58-48FE-A037-B25AF2511956}"
 EndProject
@@ -9,18 +9,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{02EA681E-C7D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Easy", "Easy", "{7E833DCA-2877-48BE-8B04-1A43EC21E85F}"
 	ProjectSection(SolutionItems) = preProject
-		175. Combine Two Tables = 175. Combine Two Tables
-		176. Second highest salary = 176. Second highest salary
-		181. Employees Earning More Than Their Managers = 181. Employees Earning More Than Their Managers
-		182. Duplicate Emails = 182. Duplicate Emails
-		183. Customers Who Never Order = 183. Customers Who Never Order
-		196. Delete Duplicate Emails = 196. Delete Duplicate Emails
-		197. Rising Temperature = 197. Rising Temperature
+		SQL\Easy\175. Combine Two Tables = SQL\Easy\175. Combine Two Tables
+		SQL\Easy\176. Second highest salary = SQL\Easy\176. Second highest salary
+		SQL\Easy\181. Employees Earning More Than Their Managers = SQL\Easy\181. Employees Earning More Than Their Managers
+		SQL\Easy\182. Duplicate Emails = SQL\Easy\182. Duplicate Emails
+		SQL\Easy\183. Customers Who Never Order = SQL\Easy\183. Customers Who Never Order
+		SQL\Easy\196. Delete Duplicate Emails = SQL\Easy\196. Delete Duplicate Emails
+		SQL\Easy\197. Rising Temperature = SQL\Easy\197. Rising Temperature
+		511. Game Play Analysis I = 511. Game Play Analysis I
+		577. Employee Bonus = 577. Employee Bonus
+		584. Find Customer Referee = 584. Find Customer Referee
+		586. Customer Placing the Largest Number of Orders = 586. Customer Placing the Largest Number of Orders
+		595. Big Countries = 595. Big Countries
+		596. Classes With at Least 5 Students = 596. Classes With at Least 5 Students
+		607. Sales Person. = 607. Sales Person.
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Medium", "Medium", "{59A2CDDB-878A-4D2F-B48E-622886962885}"
 	ProjectSection(SolutionItems) = preProject
-		177. Nth Highest Salary = 177. Nth Highest Salary
+		SQL\Medium\177. Nth Highest Salary = SQL\Medium\177. Nth Highest Salary
+		178. Rank Scores = 178. Rank Scores
+		180. Consecutive Numbers = 180. Consecutive Numbers
+		184. Department Highest Salary = 184. Department Highest Salary
+		550. Game Play Analysis IV = 550. Game Play Analysis IV
 	EndProjectSection
 EndProject
 Global
