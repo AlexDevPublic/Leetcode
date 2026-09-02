@@ -1,0 +1,77 @@
+Given two strings ransomNote and magazine, return true if ransomNote can be constructed by using the letters from magazine and false otherwise.
+
+Each letter in magazine can only be used once in ransomNote.
+
+ 
+
+Example 1:
+
+Input: ransomNote = "a", magazine = "b"
+Output: false
+Example 2:
+
+Input: ransomNote = "aa", magazine = "ab"
+Output: false
+Example 3:
+
+Input: ransomNote = "aa", magazine = "aab"
+Output: true
+ 
+
+Constraints:
+
+1 <= ransomNote.length, magazine.length <= 105
+ransomNote and magazine consist of lowercase English letters.
+
+Solution
+
+public class Solution
+{
+    private const int _maxLettersCount = 100000;
+    public bool CanConstruct(string ransomNote, string magazine)
+    {
+        if (string.IsNullOrEmpty(ransomNote) || string.IsNullOrEmpty(magazine))
+        {
+            return false;
+        }
+        ValidateMaxLettersCount(ransomNote);
+        ValidateMaxLettersCount(magazine);
+
+        var lettersCount = Countletters(magazine);
+
+        foreach (var letter in ransomNote)
+        {
+            if (!lettersCount.TryGetValue(letter, out var count) || count == 0)
+            {
+                return false;
+            }
+
+            lettersCount[letter] -= 1;
+        }
+
+        return true;
+
+    }
+    private void ValidateMaxLettersCount(string str)
+    {
+        if (str.Length >= _maxLettersCount)
+        {
+            throw new ArgumentException("Invalid max letters count");
+        }
+    }
+
+    private Dictionary<char, int> Countletters(string str)
+    {
+        var lettersCount = new Dictionary<char, int>();
+
+        foreach (char c in str)
+        {
+            if (!lettersCount.ContainsKey(c))
+            {
+                lettersCount.Add(c, str.Count(letter => letter == c));
+            }
+        }
+
+        return lettersCount;
+    }
+}
