@@ -1,53 +1,50 @@
-﻿Console.WriteLine("Hello, World!");
-
-
-public class Solution
+﻿public class Solution
 {
-    private const int _MaxLettersCount = 100000;
-    public static bool CanConstruct(string ransomNote, string magazine)
+    const int maxStringLength = 2 * 100000;
+
+    public bool IsPalindrome(string s)
     {
-        if (string.IsNullOrEmpty(ransomNote) || string.IsNullOrEmpty(magazine))
+        if (string.IsNullOrEmpty(s))
         {
             return false;
         }
-        ValidateMaxLettersCount(ransomNote);
-        ValidateMaxLettersCount(magazine);
 
-        var lettersCount = Countletters(magazine);
-
-        foreach (var letter in ransomNote)
+        if (string.IsNullOrEmpty(s.Trim()) || s.Length == 1)
         {
-            if (!lettersCount.TryGetValue(letter, out var count) || count == 0)
+            return true;
+        }
+
+        if (s.Length > maxStringLength)
+        {
+            throw new InvalidDataException($"The string max length is {maxStringLength}");
+        }
+
+        int leftIndex = 0;
+        int rightIndex = s.Length - 1;
+
+        while (leftIndex < rightIndex)
+        {
+            if (!char.IsLetterOrDigit(s[leftIndex]))
+            {
+                leftIndex++;
+                continue;
+            }
+
+            if (!char.IsLetterOrDigit(s[rightIndex]))
+            {
+                rightIndex--;
+                continue;
+            }
+
+            if (char.ToLower(s[leftIndex]) != char.ToLower(s[rightIndex]))
             {
                 return false;
             }
 
-            lettersCount[letter] -= 1;
+            leftIndex++;
+            rightIndex--;
         }
 
         return true;
-
-    }
-    private static void ValidateMaxLettersCount(string str)
-    {
-        if (str.Length >= _MaxLettersCount)
-        {
-            throw new ArgumentException("Invalid max letters count");
-        }
-    }
-
-    private static Dictionary<char, int> Countletters(string str)
-    {
-        var lettersCount = new Dictionary<char, int>();
-
-        foreach (char c in str)
-        {
-            if (!lettersCount.ContainsKey(c))
-            {
-                lettersCount.Add(c, str.Count(letter => letter == c));
-            }
-        }
-
-        return lettersCount;
     }
 }
