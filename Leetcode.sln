@@ -39,10 +39,17 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Easy", "Easy", "{E09960E6-7722-40E2-B408-29EBE6E0C596}"
 	ProjectSection(SolutionItems) = preProject
 		125. Valid Palindrome = 125. Valid Palindrome
+		219. Contains Duplicate II = 219. Contains Duplicate II
 		383. Ransom Note = 383. Ransom Note
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{EB4B809B-68F5-4615-BB5B-CDD88736E536}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Medium", "Medium", "{FA7B497D-90B1-4DEA-B050-90A86E232571}"
+	ProjectSection(SolutionItems) = preProject
+		11. Container With Most Water = 11. Container With Most Water
+		167. Two Sum II - Input Array Is Sorted = 167. Two Sum II - Input Array Is Sorted
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +73,7 @@ Global
 		{7E833DCA-2877-48BE-8B04-1A43EC21E85F} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{59A2CDDB-878A-4D2F-B48E-622886962885} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{E09960E6-7722-40E2-B408-29EBE6E0C596} = {248FC758-59FA-4D12-8840-66DA15FC4477}
+		{FA7B497D-90B1-4DEA-B050-90A86E232571} = {248FC758-59FA-4D12-8840-66DA15FC4477}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {585FCA10-2F1F-4F38-8A31-61E22F96F383}

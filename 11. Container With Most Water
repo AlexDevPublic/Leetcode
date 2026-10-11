@@ -1,0 +1,68 @@
+11. Container With Most Water
+Example 1:
+
+
+Input: height = [1,8,6,2,5,4,8,3,7]
+Output: 49
+Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain is 49.
+Example 2:
+
+Input: height = [1,1]
+Output: 1
+ 
+
+Constraints:
+
+n == height.length
+2 <= n <= 105
+0 <= height[i] <= 104
+
+solution
+
+public class Solution
+{
+    private const int HeightMaxLength = 1000000;
+    private const int HeightMinLength = 2;
+    private const int MinValue = 0;
+    private const int MaxValue = 10000;
+
+    public int MaxArea(int[] height)
+    {
+        if (height.Length < HeightMinLength)
+        {
+            throw new ArgumentException($"The amount of height is less than {HeightMinLength}");
+        }
+
+        if (height.Length > HeightMaxLength)
+        {
+            throw new ArgumentException($"The amount of height is higher than {HeightMaxLength}");
+        }
+
+        int leftIndex = 0, rightIndex = height.Length -1, maxArea = 0;
+
+        while(leftIndex < rightIndex)
+        {
+            var h = Math.Min(height[leftIndex], height[rightIndex]);
+
+            var w = rightIndex - leftIndex;
+
+            var newArea =  h * w;
+         
+            if (newArea > maxArea)
+            {
+                maxArea = newArea;
+            }
+
+            if (height[leftIndex] < height[rightIndex])
+            {
+                leftIndex++;
+            }
+            else
+            {
+                rightIndex--;
+            }
+        }
+
+        return maxArea;
+    }
+}

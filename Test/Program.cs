@@ -1,50 +1,49 @@
-﻿public class Solution
+﻿Console.WriteLine(Solution.MaxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]));
+
+public static class Solution
 {
-    const int maxStringLength = 2 * 100000;
+    private const int HeightMaxLength = 1000000;
+    private const int HeightMinLength = 2;
+    private const int MinValue = 0;
+    private const int MaxValue = 10000;
 
-    public bool IsPalindrome(string s)
+    public static int MaxArea(int[] height)
     {
-        if (string.IsNullOrEmpty(s))
+        if (height.Length < HeightMinLength)
         {
-            return false;
+            throw new ArgumentException($"The amount of height is less than {HeightMinLength}");
         }
 
-        if (string.IsNullOrEmpty(s.Trim()) || s.Length == 1)
+        if (height.Length > HeightMaxLength)
         {
-            return true;
+            throw new ArgumentException($"The amount of height is higher than {HeightMaxLength}");
         }
 
-        if (s.Length > maxStringLength)
-        {
-            throw new InvalidDataException($"The string max length is {maxStringLength}");
-        }
-
-        int leftIndex = 0;
-        int rightIndex = s.Length - 1;
+        int leftIndex = 0, rightIndex = height.Length - 1, maxArea = 0;
 
         while (leftIndex < rightIndex)
         {
-            if (!char.IsLetterOrDigit(s[leftIndex]))
+            var h = Math.Min(height[leftIndex], height[rightIndex]);
+
+            var w = rightIndex - leftIndex;
+
+            var newArea = h * w;
+
+            if (newArea > maxArea)
+            {
+                maxArea = newArea;
+            }
+
+            if (height[leftIndex] < height[rightIndex])
             {
                 leftIndex++;
-                continue;
             }
-
-            if (!char.IsLetterOrDigit(s[rightIndex]))
+            else
             {
                 rightIndex--;
-                continue;
             }
-
-            if (char.ToLower(s[leftIndex]) != char.ToLower(s[rightIndex]))
-            {
-                return false;
-            }
-
-            leftIndex++;
-            rightIndex--;
         }
 
-        return true;
+        return maxArea;
     }
 }
