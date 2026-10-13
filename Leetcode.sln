@@ -49,6 +49,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Medium", "Medium", "{FA7B49
 	ProjectSection(SolutionItems) = preProject
 		11. Container With Most Water = 11. Container With Most Water
 		167. Two Sum II - Input Array Is Sorted = 167. Two Sum II - Input Array Is Sorted
+		3. Longest Substring Without Repeating Characters = 3. Longest Substring Without Repeating Characters
 	EndProjectSection
 EndProject
 Global
