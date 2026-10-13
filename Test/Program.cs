@@ -1,49 +1,50 @@
-﻿Console.WriteLine(Solution.MaxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]));
+﻿
+var s = "\t";
+
+Console.WriteLine(Solution.LengthOfLongestSubstring(s));
 
 public static class Solution
 {
-    private const int HeightMaxLength = 1000000;
-    private const int HeightMinLength = 2;
-    private const int MinValue = 0;
-    private const int MaxValue = 10000;
-
-    public static int MaxArea(int[] height)
+    private const int maxStringLength = 100000;
+    public static int LengthOfLongestSubstring (string s)
     {
-        if (height.Length < HeightMinLength)
+        if (s.Length > maxStringLength)
         {
-            throw new ArgumentException($"The amount of height is less than {HeightMinLength}");
+            throw new ArgumentException($"Max length of string is {maxStringLength}");
         }
+        var chars = new HashSet<char>();
 
-        if (height.Length > HeightMaxLength)
+        int maxSubstringLength = 0, leftIndex = 0;
+
+        for (int rightIndex = 0; rightIndex < s.Length;  rightIndex++)
         {
-            throw new ArgumentException($"The amount of height is higher than {HeightMaxLength}");
-        }
+            var ch = s[rightIndex];
 
-        int leftIndex = 0, rightIndex = height.Length - 1, maxArea = 0;
+            var a = char.IsSymbol(ch);
 
-        while (leftIndex < rightIndex)
-        {
-            var h = Math.Min(height[leftIndex], height[rightIndex]);
-
-            var w = rightIndex - leftIndex;
-
-            var newArea = h * w;
-
-            if (newArea > maxArea)
+            if (!IsAllowedCharacter(ch))
             {
-                maxArea = newArea;
+                throw new InvalidDataException("String must consists of English letters, digits, symbols and spaces");
             }
 
-            if (height[leftIndex] < height[rightIndex])
+            while (chars.Contains(ch))
             {
+                chars.Remove(s[leftIndex]);
                 leftIndex++;
             }
-            else
-            {
-                rightIndex--;
-            }
+
+            chars.Add(ch);
+
+            maxSubstringLength = Math.Max(maxSubstringLength, rightIndex - leftIndex + 1);
         }
 
-        return maxArea;
+        return maxSubstringLength;
     }
+
+    private static bool IsAllowedCharacter(char ch) =>
+        char.IsLetter(ch) && ch <= 127 ||
+        char.IsDigit(ch) ||
+        char.IsSymbol(ch) ||
+        char.IsPunctuation(ch) ||
+        ch == ' ';
 }
