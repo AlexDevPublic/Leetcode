@@ -1,0 +1,157 @@
+Given a 1-indexed array of integers numbers that is already sorted in non-decreasing order, find two numbers such that they add up to a specific target number. Let these two numbers be numbers[index1] and numbers[index2] where 1 <= index1 < index2 <= numbers.length.
+
+Return the indices of the two numbers index1 and index2, each incremented by one, as an integer array [index1, index2] of length 2.
+
+The tests are generated such that there is exactly one solution. You may not use the same element twice.
+
+Your solution must use only constant extra space.
+
+ 
+
+Example 1:
+
+Input: numbers = [2,7,11,15], target = 9
+Output: [1,2]
+Explanation: The sum of 2 and 7 is 9. Therefore, index1 = 1, index2 = 2. We return [1, 2].
+Example 2:
+
+Input: numbers = [2,3,4], target = 6
+Output: [1,3]
+Explanation: The sum of 2 and 4 is 6. Therefore index1 = 1, index2 = 3. We return [1, 3].
+Example 3:
+
+Input: numbers = [-1,0], target = -1
+Output: [1,2]
+Explanation: The sum of -1 and 0 is -1. Therefore index1 = 1, index2 = 2. We return [1, 2].
+ 
+
+Constraints:
+
+2 <= numbers.length <= 3 * 104
+-1000 <= numbers[i] <= 1000
+numbers is sorted in non-decreasing order.
+-1000 <= target <= 1000
+The tests are generated such that there is exactly one solution.
+
+
+
+via pointers
+public class Solution {
+    private const int _maxNumbersLength = 3 * 100000;
+
+    public int[] TwoSum(int[] numbers, int target) {
+        if (numbers.Length <= 1)
+            throw new ArgumentException("Array must be more than 2 elements");
+
+        if (numbers.Length > _maxNumbersLength)
+            throw new ArgumentException($"The array has more than {_maxNumbersLength} elements");
+
+       if (numbers.Length <= 1)
+        throw new ArgumentException("Array must be more than 2 elements");
+
+        if (numbers.Length > _maxNumbersLength)
+            throw new ArgumentException($"The array has more than {_maxNumbersLength} elements");
+
+        var leftIndex = 0;
+        var rightIndex = numbers.Length - 1;
+        var leftValue = numbers[leftIndex];
+        var rightValue = numbers[rightIndex];
+
+        while (target != leftValue + rightValue)
+        {
+            if (rightValue > target && leftValue >= 0)
+            {
+                rightIndex--;
+                rightValue = numbers[rightIndex];
+                continue;
+            }
+            if (leftValue + rightValue < target)
+            {
+                leftIndex++;
+                leftValue = numbers[leftIndex];
+                continue;
+            }
+              rightIndex--;
+              rightValue = numbers[rightIndex];
+        }
+        
+        return new[] { leftIndex+1, rightIndex+1 };
+    }
+}
+
+
+via quick sort
+public class Solution
+{
+    private const int _maxNumbersLength = 3 * 100000;
+    public static int[] TwoSum(int[] numbers, int target)
+    {
+        if (numbers.Length <= 1)
+            throw new ArgumentException("Array must be more than 2 elements");
+
+        if (numbers.Length > _maxNumbersLength)
+            throw new ArgumentException($"The array has more than {_maxNumbersLength} elements");
+
+        var nearestValue = GetNearestValueToTarget(numbers, target);
+        var nearestValueIndex = numbers.LastIndexOf(nearestValue);
+        var secondValue = GetSecondValue(numbers[..nearestValueIndex], nearestValue, target);
+        var secondIndex = numbers.IndexOf(secondValue);
+        return [secondIndex + 1, nearestValueIndex + 1];
+    }
+
+    private static int GetSecondValue(int[] numbers,int foundNearestValue, int target)
+    {
+        var delimeter = 2;
+        var currentIndex = numbers.Length / delimeter;
+        var cursorValue = numbers[currentIndex];
+
+        if (foundNearestValue + cursorValue == target)
+        {
+            return cursorValue;
+        }
+
+        while (foundNearestValue + cursorValue > target && target > 0)
+        {
+            delimeter *= 2;
+            currentIndex -= currentIndex + numbers.Length / delimeter;
+            cursorValue = numbers[currentIndex];
+        }
+
+        while (foundNearestValue + cursorValue < target)
+        {
+            delimeter *= 2;
+            currentIndex += currentIndex + numbers.Length / delimeter;
+            cursorValue = numbers[currentIndex];
+        }
+
+        return cursorValue;
+    }
+
+    private static int GetNearestValueToTarget(int[] numbers, int target)
+    {
+        var delimeter = 2;
+        var currentIndex = numbers.Length / delimeter;
+        var cursorValue = numbers[currentIndex];
+
+        if (cursorValue < target && numbers[currentIndex + 1] >= target)
+        {
+            return currentIndex;
+        }
+
+        while (cursorValue > target && target >= 0)
+        {
+            delimeter *= 2;
+            currentIndex = currentIndex - numbers.Length / delimeter;
+            cursorValue = numbers[currentIndex];
+        }
+
+        while(cursorValue < target && currentIndex + 1 != numbers.Length && numbers[currentIndex + 1] < target )
+        {
+            delimeter *= 2;
+            currentIndex += currentIndex + numbers.Length / delimeter;
+            cursorValue = numbers[currentIndex];
+        }
+
+        return cursorValue;
+    }
+}
