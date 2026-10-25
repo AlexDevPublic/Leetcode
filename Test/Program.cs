@@ -1,50 +1,39 @@
-﻿
-var s = "\t";
+﻿var s = "ccc";
 
-Console.WriteLine(Solution.LengthOfLongestSubstring(s));
+Console.WriteLine(Solution.LongestPalindrome(s));
 
 public static class Solution
 {
-    private const int maxStringLength = 100000;
-    public static int LengthOfLongestSubstring (string s)
+    public static string LongestPalindrome(string s)
     {
-        if (s.Length > maxStringLength)
+        if (string.IsNullOrEmpty(s)) return "";
+
+        int start = 0, end = 0;
+
+        for (int i = 0; i < s.Length; i++)
         {
-            throw new ArgumentException($"Max length of string is {maxStringLength}");
-        }
-        var chars = new HashSet<char>();
+            int len1 = ExpandAroundCenter(s, i, i);
+            int len2 = ExpandAroundCenter(s, i, i + 1);
+            int len = Math.Max(len1, len2);
 
-        int maxSubstringLength = 0, leftIndex = 0;
-
-        for (int rightIndex = 0; rightIndex < s.Length;  rightIndex++)
-        {
-            var ch = s[rightIndex];
-
-            var a = char.IsSymbol(ch);
-
-            if (!IsAllowedCharacter(ch))
+            if (len > end - start + 1)
             {
-                throw new InvalidDataException("String must consists of English letters, digits, symbols and spaces");
+                start = i - (len - 1) / 2;
+                end = i + len / 2;
             }
-
-            while (chars.Contains(ch))
-            {
-                chars.Remove(s[leftIndex]);
-                leftIndex++;
-            }
-
-            chars.Add(ch);
-
-            maxSubstringLength = Math.Max(maxSubstringLength, rightIndex - leftIndex + 1);
         }
 
-        return maxSubstringLength;
+        return s.Substring(start, end - start + 1);
     }
 
-    private static bool IsAllowedCharacter(char ch) =>
-        char.IsLetter(ch) && ch <= 127 ||
-        char.IsDigit(ch) ||
-        char.IsSymbol(ch) ||
-        char.IsPunctuation(ch) ||
-        ch == ' ';
+    private static int ExpandAroundCenter(string s, int left, int right)
+    {
+        while (left >= 0 && right < s.Length && s[left] == s[right])
+        {
+            left--;
+            right++;
+        }
+        return right - left - 1;
+    }
 }
+
